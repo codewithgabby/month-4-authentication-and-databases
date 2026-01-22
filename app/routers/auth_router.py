@@ -64,6 +64,8 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     return user
 
 # LOGIN (SET COOKIES HERE)
+# TODO: update last_login_at on successful login
+
 @router.post("/login", response_model=TokenPair, status_code=status.HTTP_200_OK)
 @limiter.limit("5/minute")
 def login(
