@@ -1,37 +1,18 @@
 import os
 
-# ===============================
-# Database
-# ===============================
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# ===============================
-# Security
-# ===============================
-SECRET_KEY = os.environ.get("SECRET_KEY")
-REFRESH_SECRET_KEY = os.environ.get("REFRESH_SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
+REFRESH_SECRET_KEY = os.getenv("REFRESH_SECRET_KEY")
+
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 10))
+REFRESH_TOKEN_EXPIRE_DAYS = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", 7))
 
 ALGORITHM = "HS256"
 
-ACCESS_TOKEN_EXPIRE_MINUTES = int(
-    os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES", 10)
-)
-
-REFRESH_TOKEN_EXPIRE_DAYS = int(
-    os.environ.get("REFRESH_TOKEN_EXPIRE_DAYS", 7)
-)
-
-# ===============================
-# Safety checks (VERY IMPORTANT)
-# ===============================
-if not SECRET_KEY:
-    raise RuntimeError("SECRET_KEY is not set")
-
-if not REFRESH_SECRET_KEY:
-    raise RuntimeError("REFRESH_SECRET_KEY is not set")
-
-if not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL is not set")
+# Safety check (VERY IMPORTANT)
+if not SECRET_KEY or not REFRESH_SECRET_KEY:
+    raise RuntimeError("JWT secrets are not set")
 
 # TODO:
 # Refactor this config to use Pydantic BaseSettings after project completion
