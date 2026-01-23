@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker
 
 from app.models.user_model import User
+from app.db_base import Base
+
 
 from app.config import DATABASE_URL
 
@@ -16,7 +18,6 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
-Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
