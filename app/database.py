@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-from app.models import User
+from app.models.user_model import User
 
 from app.config import DATABASE_URL
 
