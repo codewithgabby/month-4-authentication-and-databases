@@ -20,6 +20,8 @@ class User(Base):
     last_login_at = Column(DateTime, nullable=True)
     email_verified_at = Column(DateTime, nullable=True)
 
+    last_login_ip = Column(String, nullable=True)
+
     
 
     # Relationships
